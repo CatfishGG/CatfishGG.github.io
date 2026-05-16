@@ -1,116 +1,294 @@
-<!DOCTYPE html><html lang="en"><head>
-    <!-- INIT -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Meta Tags -->
-    <title id="typing-title"></title>
-    <meta name="title" content="@catfishgg ~ catfishgg.sh">
-    <meta name="description" content="100% skid, 0% gay">
-    <meta name="theme-color" content="#2f3036">
-
-    <!-- Open Graph -->
+    <title>@catfishgg</title>
+    <meta name="description" content="Cato's corner of the internet">
+    <meta name="theme-color" content="#0f0f1a">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="catfishgg.sh">
-    <meta property="og:url" content="#">
     <meta property="og:title" content="@catfishgg">
-    <meta property="og:description" content="100% skid, 0% gay">
-    <meta property="og:image" content="images/thumbnail.jpg">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="3">
-    <meta property="twitter:title" content="@catfishgg">
-    <meta property="twitter:description" content="100% skid, 0% gay">
-    <meta property="twitter:image" content="https://cdn.discordapp.com/attachments/1135771314477604887/1223010740554694716/thumbnail.jpg?ex=66184c82&is=6605d782&hm=2149082dfa9a94508e163b625bcb16deb08cdebe196aa7cfc83a788e226cee9d&">
-	
-    <!-- Scripts -->
-    <link rel="stylesheet" href="css/beta.css">
-    <link rel="stylesheet" href="css/all.min.css">
+    <meta property="og:description" content="Cato's corner of the internet">
     <link rel="icon" href="images/icon.png">
-    <script src="js/jquery.min.js"></script>
-    <script src="js/enc-cursed.js"></script>
-</head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
+        :root {
+            --bg-deep: #0a0a12;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --bg-card-hover: rgba(255, 255, 255, 0.06);
+            --border: rgba(255, 255, 255, 0.08);
+            --text-primary: #e8e8f0;
+            --text-muted: rgba(232, 232, 240, 0.45);
+            --accent: #a78bfa;
+            --accent-glow: rgba(167, 139, 250, 0.25);
+            --accent-2: #c084fc;
+            --radius: 20px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Animated gradient orbs */
+        .bg-orbs {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .bg-orbs span {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.35;
+            animation: drift 20s ease-in-out infinite alternate;
+        }
+
+        .bg-orbs span:nth-child(1) {
+            width: 500px;
+            height: 500px;
+            background: #7c3aed;
+            top: -15%;
+            left: -10%;
+            animation-duration: 25s;
+        }
+
+        .bg-orbs span:nth-child(2) {
+            width: 400px;
+            height: 400px;
+            background: #4f46e5;
+            bottom: -20%;
+            right: -5%;
+            animation-duration: 20s;
+            animation-delay: -7s;
+        }
+
+        .bg-orbs span:nth-child(3) {
+            width: 300px;
+            height: 300px;
+            background: #a855f7;
+            top: 50%;
+            left: 60%;
+            animation-duration: 30s;
+            animation-delay: -12s;
+        }
+
+        @keyframes drift {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.05); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+            100% { transform: translate(10px, 10px) scale(1.02); }
+        }
+
+        /* Profile card */
+        .card {
+            position: relative;
+            z-index: 10;
+            background: var(--bg-card);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 52px 48px;
+            text-align: center;
+            width: 360px;
+            box-shadow:
+                0 0 0 1px rgba(255,255,255,0.03),
+                0 24px 48px rgba(0,0,0,0.4),
+                0 0 80px rgba(167, 139, 250, 0.08);
+            animation: cardEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes cardEntrance {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .avatar-wrap {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 24px;
+        }
+
+        .avatar {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(167, 139, 250, 0.3);
+            box-shadow: 0 0 0 6px rgba(167, 139, 250, 0.08), 0 0 30px var(--accent-glow);
+            transition: var(--transition);
+        }
+
+        .avatar-wrap::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 1px solid rgba(167, 139, 250, 0.2);
+            animation: pulseRing 3s ease-in-out infinite;
+        }
+
+        @keyframes pulseRing {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.04); }
+        }
+
+        .handle {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--accent);
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .handle::before {
+            content: '@';
+            opacity: 0.6;
+        }
+
+        .name {
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #e8e8f0 0%, #a78bfa 50%, #c084fc 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .bio {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 300;
+            line-height: 1.6;
+            margin-bottom: 36px;
+            font-style: italic;
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            margin: 28px 0;
+        }
+
+        /* Social links */
+        .links {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 20px;
+        }
+
+        .link:hover {
+            background: var(--bg-card-hover);
+            border-color: rgba(167, 139, 250, 0.3);
+            color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3), 0 0 20px var(--accent-glow);
+        }
+
+        .link.github:hover { color: #e8e8f0; border-color: rgba(232,232,240,0.3); }
+        .link.discord:hover { color: #5865F2; border-color: rgba(88,101,242,0.4); }
+        .link.guns:hover { color: #f97316; border-color: rgba(249,115,22,0.4); }
+
+        /* Tagline at bottom */
+        .tagline {
+            margin-top: 32px;
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(232,232,240,0.2);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Subtle grid overlay */
+        .grid-overlay {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 1;
+            pointer-events: none;
+        }
+    </style>
+</head>
 <body>
-    <!-- PreLoader -->
-    <link rel="stylesheet" href="css/load.css">
-    <div class="preloader hide-preloader">
-        <div class="dank-ass-loader">
-            <div class="row">
-                <div class="arrow up outer outer-18"></div>
-                <div class="arrow down outer outer-17"></div>
-                <div class="arrow up outer outer-16"></div>
-                <div class="arrow down outer outer-15"></div>
-                <div class="arrow up outer outer-14"></div>
-            </div>
-            <div class="row">
-                <div class="arrow up outer outer-1"></div>
-                <div class="arrow down outer outer-2"></div>
-                <div class="arrow up inner inner-6"></div>
-                <div class="arrow down inner inner-5"></div>
-                <div class="arrow up inner inner-4"></div>
-                <div class="arrow down outer outer-13"></div>
-                <div class="arrow up outer outer-12"></div>
-            </div>
-            <div class="row">
-                <div class="arrow down outer outer-3"></div>
-                <div class="arrow up outer outer-4"></div>
-                <div class="arrow down inner inner-1"></div>
-                <div class="arrow up inner inner-2"></div>
-                <div class="arrow down inner inner-3"></div>
-                <div class="arrow up outer outer-11"></div>
-                <div class="arrow down outer outer-10"></div>
-            </div>
-            <div class="row">
-                <div class="arrow down outer outer-5"></div>
-                <div class="arrow up outer outer-6"></div>
-                <div class="arrow down outer outer-7"></div>
-                <div class="arrow up outer outer-8"></div>
-                <div class="arrow down outer outer-9"></div>
-            </div>
+    <div class="bg-orbs">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="grid-overlay"></div>
+
+    <div class="card">
+        <div class="avatar-wrap">
+            <img src="./images/cato.png" alt="Cato" class="avatar">
         </div>
+
+        <div class="handle">catfishgg</div>
+        <div class="name">Cato</div>
+        <div class="bio">professional skid with skill issues</div>
+
+        <div class="links">
+            <a href="https://github.com/CatfishGG" target="_blank" rel="noopener" class="link github" title="GitHub">
+                <i class="fa-brands fa-github"></i>
+            </a>
+            <a href="https://discord.com/users/239699019415158787" target="_blank" rel="noopener" class="link discord" title="Discord">
+                <i class="fa-brands fa-discord"></i>
+            </a>
+            <a href="https://guns.lol/cato1337" target="_blank" rel="noopener" class="link guns" title="guns.lol">
+                <i class="fa-solid fa-gun"></i>
+            </a>
+        </div>
+
+        <div class="tagline">sysadmin / developer / skid</div>
     </div>
 
-
-    <!-- Profile Card -->
-    <div class="profile-container">
-        <div class="profile">
-            <img src="./images/cato.png">
-            <h1>@Cato</h1>
-            <p style="font-style:italic;">proffessional skid with skill issues</p>
-        </div>
-
-        <!-- Social Icons -->
-        <div class="icons">
-            <a href="https://github.com/CatfishGG" target="https://github.com/CatfishGG">
-                <i class="fa-brands fa-github fa-2x"></i></a>
-            <a href="https://discord.com/users/239699019415158787" target="https://discord.com/users/239699019415158787">
-                <i class="fa-brands fa-discord fa-2x"></i></a>
-            <a href="https://stats.fm/catfishgg" target="https://stats.fm/catfishgg">
-                <i class="fa-brands fa-lastfm fa-2x"></i></a>
-        </div>
-        
-        
-
-    <!-- Background -->
-    <section>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-    </section>
-
-    
-<script>
-    const container = document.querySelector('.preloader'); 
-    window.addEventListener('load' , () =>{ container.classList.add('hide-preloader'); })
-</script>
-
-</body></html>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</body>
+</html>
