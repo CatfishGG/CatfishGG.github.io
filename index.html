@@ -365,10 +365,10 @@
 
         .handle {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 500;
             color: var(--accent);
-            letter-spacing: 0.1em;
+            letter-spacing: 0.12em;
             text-transform: lowercase;
             margin-bottom: 8px;
             animation: handleGlow 2s ease-in-out infinite;
@@ -458,6 +458,8 @@
         .link.discord:hover { color: #5865F2; border-color: rgba(88,101,242,0.4); box-shadow: 0 10px 30px rgba(0,0,0,0.4), 0 0 30px rgba(88,101,242,0.3); }
         .link.guns:hover { color: #f97316; border-color: rgba(249,115,22,0.4); box-shadow: 0 10px 30px rgba(0,0,0,0.4), 0 0 30px rgba(249,115,22,0.3); }
 
+        .link.guns:hover i { transform: scale(1.2) rotate(-15deg); }
+
         .link i {
             position: relative;
             z-index: 1;
@@ -509,7 +511,14 @@
                 <i class="fa-brands fa-discord"></i>
             </a>
             <a href="https://guns.lol/cato1337" target="_blank" rel="noopener" class="link guns" title="guns.lol">
-                <i class="fa-solid fa-gun"></i>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <circle cx="12" cy="12" r="3"/>
+                  <line x1="12" y1="2" x2="12" y2="6"/>
+                  <line x1="12" y1="18" x2="12" y2="22"/>
+                  <line x1="2" y1="12" x2="6" y2="12"/>
+                  <line x1="18" y1="12" x2="22" y2="12"/>
+                </svg>
             </a>
         </div>
 
@@ -535,14 +544,14 @@
         }
 
         // Generate shooting stars
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 6; i++) {
             const star = document.createElement('div');
             star.className = 'shooting-star';
             star.style.left = Math.random() * 100 + '%';
             star.style.top = (-10 + Math.random() * 40) + '%';
             star.style.setProperty('--angle', (-15 + Math.random() * 20) + 'deg');
             star.style.setProperty('--duration', (3 + Math.random() * 4) + 's');
-            star.style.animationDelay = (-Math.random() * 10) + 's';
+            star.style.animationDelay = (-Math.random() * 12) + 's';
             starsContainer.appendChild(star);
         }
     </script>
